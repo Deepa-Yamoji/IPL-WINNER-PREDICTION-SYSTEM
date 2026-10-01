@@ -27,12 +27,24 @@ if not os.path.exists("live_ipl_model.pkl"):
         local_dir="."
     )
 
-model = joblib.load("live_ipl_model.pkl")
+@st.cache_resource
+def load_model():
+    return joblib.load("live_ipl_model.pkl")
 
-ct = joblib.load("live_transform.pkl")
+model = load_model()
 
-imputer = joblib.load("live_imputer.pkl")
+@st.cache_resource
+def load_transform():
+    return joblib.load("live_transform.pkl")
 
+ct = load_transform()
+
+
+@st.cache_resource
+def load_imputer():
+    return joblib.load("live_imputer.pkl")
+
+imputer = load_imputer()
 # ==========================================
 # Title
 # ==========================================
