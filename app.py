@@ -17,8 +17,20 @@ st.set_page_config(
 # Load model
 # ==========================================
 
+import os
+from huggingface_hub import hf_hub_download
+
+if not os.path.exists("live_ipl_model.pkl"):
+    hf_hub_download(
+        repo_id="DeepaVY/ipl-winning-team-model",
+        filename="live_ipl_model.pkl",
+        local_dir="."
+    )
+
 model = joblib.load("live_ipl_model.pkl")
+
 ct = joblib.load("live_transform.pkl")
+
 imputer = joblib.load("live_imputer.pkl")
 
 # ==========================================
